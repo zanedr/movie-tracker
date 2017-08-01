@@ -4,16 +4,12 @@ const allFavorites = (state = [], action) => {
     case 'LOAD_FAVORITES':
       return action.allFavorites
     case 'TOGGLE_FAVORITE':
-      let removal = []
-      state.forEach((val, index) => {
+      let removal = state.filter((val, index) => {
         if(val.title !== action.film.title) {
-          removal[removal.length] = val
+          return val
         }
       })
-      if(state.length < 1) {
-        let blankSlate = action.film
-        return [blankSlate]
-      } else if(removal.length < state.length) {
+      if(removal.length < state.length) {
         return removal
       } else {
         let tempState = state
